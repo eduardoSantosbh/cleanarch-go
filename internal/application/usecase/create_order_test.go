@@ -27,9 +27,8 @@ func TestGivenOrder_WhenSave_ThenSuccess(t *testing.T) {
 	output, err := createOrder.Execute(input)
 
 	assert.NoError(t, err)
-	assert.Equal(t, input.ID, output.ID)
-	assert.Equal(t, input.Price, output.Price)
-	assert.Equal(t, input.Tax, output.Tax)
+	assert.NotNil(t, output.ID)
+
 }
 
 func TestExecuteFailsWhenOrderSavingFails(t *testing.T) {

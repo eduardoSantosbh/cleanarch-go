@@ -1,19 +1,24 @@
 package order
 
-import "github.com/codesantos/cleanarch/pkg"
+import (
+	"github.com/codesantos/cleanarch/pkg"
+	"time"
+)
 
 type Order struct {
 	ID         pkg.ID
 	Price      float64
 	Tax        float64
 	FinalPrice float64
+	CreatedAt  time.Time
 }
 
-func NewOrder(price float64, tax float64) (*Order, error) {
+func NewOrder(price float64, tax float64, dateOrder time.Time) (*Order, error) {
 	order := &Order{
-		ID:    pkg.NewID(),
-		Price: price,
-		Tax:   tax,
+		ID:        pkg.NewID(),
+		Price:     price,
+		Tax:       tax,
+		CreatedAt: dateOrder,
 	}
 	err := order.isValid()
 	if err != nil {
@@ -22,7 +27,7 @@ func NewOrder(price float64, tax float64) (*Order, error) {
 	return order, nil
 }
 
-func (o *Order) create(id string, price float64, tax float64) {
+func (o *Order) create(price float64, tax float64) {
 	o.Price = price
 	o.Tax = tax
 }

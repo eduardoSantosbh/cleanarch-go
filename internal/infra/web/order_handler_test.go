@@ -39,7 +39,7 @@ func GivenValidInput_WhenCreate_ThenStatusCreated(t *testing.T) {
 	handler := NewOrderHandler(repo)
 	//handler := NewOrderHandler(mockRepo)
 
-	orderInput := usecase.Input{ID: "1", Price: 100.0, Tax: 10.0}
+	orderInput := usecase.Input{Price: 100.0, Tax: 10.0}
 	orderInputJson, _ := json.Marshal(orderInput)
 
 	req, _ := http.NewRequest("POST", "/orders", bytes.NewBuffer(orderInputJson))
@@ -57,7 +57,7 @@ func GivenRepoError_WhenCreate_ThenStatusInternalServerError(t *testing.T) {
 
 	handler := NewOrderHandler(mockRepo)
 
-	orderInput := usecase.Input{ID: "1", Price: 100.0, Tax: 10.0}
+	orderInput := usecase.Input{Price: 100.0, Tax: 10.0}
 	orderInputJson, _ := json.Marshal(orderInput)
 
 	req, _ := http.NewRequest("POST", "/orders", bytes.NewBuffer(orderInputJson))

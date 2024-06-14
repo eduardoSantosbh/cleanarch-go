@@ -6,7 +6,7 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 )
 
-const dns = "root:root@tcp(127.0.0.1:3306)/orders_db"
+const dns = "root:root@tcp(localhost:3306)/orders_db?charset=utf8mb4&parseTime=True&loc=Local"
 
 type AdapterMysql struct {
 	Connection *sql.DB
@@ -14,6 +14,7 @@ type AdapterMysql struct {
 
 func NewMySQLAdapter() (*AdapterMysql, error) {
 	db, err := sql.Open("mysql", dns)
+
 	if err != nil {
 		return nil, fmt.Errorf("failed to connect to db: %w", err)
 	}

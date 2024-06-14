@@ -3,6 +3,7 @@ package order
 import (
 	"github.com/stretchr/testify/assert"
 	"testing"
+	"time"
 )
 
 func TestGivenAnEmptyID_WhenCreateANewOrder_ThenShouldReceiveAnError(t *testing.T) {
@@ -21,14 +22,14 @@ func TestGivenAValidParams_WhenICallNewOrder_ThenIShouldReceiveCreateOrderWithAl
 }
 
 func TestGivenAValidParams_WhenICallNewOrderFunc_ThenIShouldReceiveCreateOrderWithAllParams(t *testing.T) {
-	order, err := NewOrder(10.0, 2.0)
+	order, err := NewOrder(10.0, 2.0, time.Now())
 	assert.Nil(t, err)
 	assert.Equal(t, 10.0, order.Price)
 	assert.Equal(t, 2.0, order.Tax)
 }
 
 func TestGivenAPriceAndTax_WhenICallCalculatePrice_ThenIShouldSetFinalPrice(t *testing.T) {
-	order, err := NewOrder(10.0, 2.0)
+	order, err := NewOrder(10.0, 2.0, time.Now())
 	assert.Nil(t, err)
 	assert.Nil(t, order.CalculateFinalPrice())
 	assert.Equal(t, 12.0, order.FinalPrice)
